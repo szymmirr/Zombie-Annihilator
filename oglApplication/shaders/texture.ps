@@ -1,0 +1,12 @@
+#version 400
+in vec2 TexCoord;
+in vec4 xPosition;
+
+uniform sampler2D tex;
+
+out vec4 outputColor;
+
+void main()
+{
+		outputColor = vec4(texture(tex, TexCoord).rgb,1);
+}
