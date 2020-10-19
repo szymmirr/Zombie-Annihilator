@@ -1,3 +1,4 @@
 oglApplication/3rd/* linguist-vendored
 oglApplication/shaders/* linguist-vendored
+bin/shaders/* linguist-vendored
 *.h linguist-generated
