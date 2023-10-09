@@ -1,6 +1,10 @@
 name: CodeChecker
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   codechecker:
@@ -8,21 +12,21 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v4
-  
+
       # Prepare a build
       - name: "Prepare build"
         run: |
           mkdir -pv Build
           cd Build
           cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-  
+
       # Run the analysis
       - uses: whisperity/codechecker-analysis-action@v1
         id: codechecker
         with:
           logfile: ${{ github.workspace }}/Build/compile_commands.json
-  
-      # Upload the results to the CI.
+
+      # Upload the results to the CI
       - uses: actions/upload-artifact@v2
         with:
           name: "CodeChecker Bug Reports"
